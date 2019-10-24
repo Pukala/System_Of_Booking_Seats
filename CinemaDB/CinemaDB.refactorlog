@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="1edc9b2d-a3e1-48d4-8aed-3b4d76b4d3aa" ChangeDateTime="10/23/2019 18:13:25">
+    <Property Name="ElementName" Value="[dbo].[Person].[First]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Person]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FirstName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3856a981-6354-4fc5-8817-89c68720dc5c" ChangeDateTime="10/23/2019 18:14:15">
+    <Property Name="ElementName" Value="[dbo].[Person].[EmailAdres]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Person]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EmailAdress" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0e6a3d8c-4979-4e2e-84a1-e053beeab03b" ChangeDateTime="10/23/2019 18:22:05">
+    <Property Name="ElementName" Value="[dbo].[FK_SeatsTable_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[SeatsTable]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_SeatsTable_Person]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6a6159d6-b400-4efb-b009-da5aa83f6f60" ChangeDateTime="10/23/2019 19:13:43">
+    <Property Name="ElementName" Value="[dbo].[SeatsTable].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SeatsTable]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SeatId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d419e1a8-7b95-4cf3-9aa3-5a57f78f0c59" ChangeDateTime="10/24/2019 15:14:34">
+    <Property Name="ElementName" Value="[dbo].[Person].[SeatNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Person]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SelectedSeatNumber" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="74c26112-cac7-4715-94d1-cd551a364601" ChangeDateTime="10/24/2019 15:15:23">
+    <Property Name="ElementName" Value="[dbo].[Person].[SelectedSeatNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Person]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Seat" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3a0bcbb9-89c0-4d54-b83e-3503ca8273c9" ChangeDateTime="10/24/2019 15:18:06">
+    <Property Name="ElementName" Value="[dbo].[Person].[Seat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Person]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[SeatN]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="575ada99-0df7-4527-8847-27dc9d759b97" ChangeDateTime="10/24/2019 15:20:22">
+    <Property Name="ElementName" Value="[dbo].[SeatsTable].[SeatNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SeatsTable]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[NumberSeat]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6f0669b5-1db8-4a11-a215-3d96c27efff0" ChangeDateTime="10/24/2019 15:20:51">
+    <Property Name="ElementName" Value="[dbo].[Person].[SeatN]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Person]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[SeatNumber]" />
+  </Operation>
+</Operations>
