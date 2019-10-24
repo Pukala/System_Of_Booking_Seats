@@ -38,7 +38,6 @@ namespace DataLibary.BusinessLogic
             sql = @"UPDATE dbo.SeatsTable SET IsReserve = " + 1 +
             " WHERE NumberSeat = @seatNumber;";
             SqlDataAccess.SaveData(sql, data);
-
         }
 
     }
