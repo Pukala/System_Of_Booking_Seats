@@ -3,15 +3,50 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/Content/style.css" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
 
-    @RenderBody()
+    <div id="container">
 
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+        <div id="menu">
+            <div id="space"></div>
+            <div class="option">
+                @Html.ActionLink("Main Page", "Start", null, new { style = "text-decoration:none; color: #ffffff; " +
+               "display: block;" })
+            </div>
+            <div class="option">
+                @Html.ActionLink("Repertoire", "Repertoire", null, new { style = "text-decoration:none; color: #ffffff; " +
+               "display: block;" })
+            </div>
+            <div class="option">
+                @Html.ActionLink("Price", "Price", null, new { style = "text-decoration:none; color: #ffffff; " +
+               "display: block;" })
+            </div>
+            <div class="option">
+                @Html.ActionLink("News", "News", null, new { style = "text-decoration:none; color: #ffffff; " +
+               "display: block;" })
+            </div>
+            <div class="option">
+                @Html.ActionLink("Contact", "Contact", null, new { style = "text-decoration:none; color: #ffffff; " +
+               "display: block;" })
+            </div>
+            <div style="clear: both"></div>
+        </div>
+
+        <div id="logo">
+            <img src="~/Content/images/logo4.jpg" />
+        </div>
+
+        @RenderBody()
+
+
+        <div id="footer">
+            Najlepszy Serwis kinowy
+        </div>
+    </div>
+
 </body>
+
 </html>

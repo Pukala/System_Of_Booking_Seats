@@ -15,7 +15,7 @@ namespace DataLibary.BusinessLogic
 
             string sql = @"select * from dbo.SeatsTable where dbo.SeatsTable.NumberSeat = " + seatNumber + ";";
 
-            return SqlDataAccess.LoadOneElementById(sql).ElementAt(0).PersonId;
+            return SqlDataAccess.LoadData<SeatModel>(sql).ElementAt(0).PersonId;
         }
 
         public static void UpdateReservation(int id,
@@ -40,5 +40,11 @@ namespace DataLibary.BusinessLogic
             SqlDataAccess.SaveData(sql, data);
         }
 
+
+        public static List<SeatModel> LoadSeatsData()
+        {
+            string sql = "select * from dbo.SeatsTable; ";
+            return SqlDataAccess.LoadData<SeatModel>(sql);
+        }
     }
 }

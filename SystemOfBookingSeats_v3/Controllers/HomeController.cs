@@ -5,16 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using SystemOfBookingSeats_v3.Models;
 
 namespace SystemOfBookingSeats_v3.Controllers
 {
     public class HomeController : Controller
     {
 
+        public ViewResult Repertoire()
+        {
+            return View();
+        }
+
         public ActionResult Start()
         {
-
             return View();
         }
 
@@ -23,9 +27,15 @@ namespace SystemOfBookingSeats_v3.Controllers
             return View();
         }
 
+        public ActionResult SeatsDataMovie1()
+        {
+            var seatsData = DataProcessor.LoadSeatsData();
+            return View(seatsData);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Reserve(PersonModel model)
+        public ActionResult SeatsDataMovie1(PersonModelUI model)
         {
             if (ModelState.IsValid)
             {

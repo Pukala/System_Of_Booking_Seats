@@ -1,0 +1,109 @@
+﻿body {
+    background-color: #404040;
+    font-family: 'Lato', sans-serif;
+}
+
+#container {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#myBody {
+    background-color: #404040;
+    font-family: 'Lato', sans-serif;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#logo {
+    color: white;
+    margin-top: 20px;
+    font-size: 44px;
+    letter-spacing: 3px;
+    font-weight: 900;
+}
+
+#menu {
+    background-color: #303030;
+    margin-top: 20px;
+    color: #ffffff;
+    padding: 10px;
+}
+
+#footer {
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.option {
+    float: left;
+    min-width: 100px;
+    height: 25px;
+    font-size: 20px;
+    padding: 10px;
+    border-right: 2px dotted #444444;
+    opacity: 0.8;
+    text-align: center;
+    text-decoration: none;
+}
+
+    .option:hover {
+        background-color: #000000;
+        cursor: pointer;
+    }
+
+#space {
+    float: left;
+    min-width: 150px;
+    height: 25px;
+    padding: 10px;
+    border-right: 2px dotted #444444;
+    opacity: 0.8;
+}
+
+#content {
+    padding: 35px;
+    width: 930px;
+    background-color: #dedede;
+    min-height: 575px;
+}
+
+.movie {
+    float: left;
+    width: 300px;
+    background-color: #000000;
+    border: 1px solid #000000;
+    height: 180px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+    text-align: center;
+    color: #000000;
+    padding: 4px;
+}
+
+    .movie:hover {
+        background-color: #ffffff;
+        cursor: pointer;
+    }
+
+.freeSeat {
+    float: left;
+    min-width: 100px;
+    height: 100px;
+    padding: 10.5px;
+    border: 2px solid #000000;
+    text-align: center;
+    text-decoration: none;
+    background-color: #6cb185;
+}
+
+    .freeSeat:hover {
+        background-color: darksalmon;
+        cursor: pointer;
+    }

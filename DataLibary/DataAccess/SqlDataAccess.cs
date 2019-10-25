@@ -26,14 +26,6 @@ namespace DataLibary.DataAccess
             }
         }
 
-        public static List<SeatModel> LoadOneElementById(string sql)
-        {
-            using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
-            {
-                return cnn.Query<SeatModel>(sql).ToList();
-            }
-        }
-
         public static int SaveData<T>(string sql, T data)
         {
             using (IDbConnection cnn = new SqlConnection(GetConnectionString()))
