@@ -1,67 +1,40 @@
 ﻿@model IEnumerable<DataLibary.Models.SeatModel>
 
 @{
-    ViewBag.Title = "SeatsDataMovie1";
+    ViewBag.Title = "SeatsData";
 }
 
-<!DOCTYPE html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
 </head>
-<body id="myBody">
+<body>
 
-    <div id="container">
+    <div id="SeatsList">
+        <div id="tv">
+            <img src="~/Content/images/Tv.jpg">
+        </div>
 
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.SeatId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PersonId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsReserve)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NumberSeat)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
+        @foreach (var item in Model)
+        {
+            if (item.IsReserve)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SeatId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PersonId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsReserve)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NumberSeat)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
-                </tr>
-
+                <div class="SeatFalse">
+                    @item.NumberSeat
+                </div>
             }
-        </table>
+            else
+            {
+                <div class="SeatTrue">
+                    @item.NumberSeat
+                </div>
+            }
+        }
 
-        @Html.Partial("Reserve", new SystemOfBookingSeats_v3.Models.PersonModelUI());
+
+        @Html.Partial("Reserve", new SystemOfBookingSeats_v3.Models.PersonModelUI())
 
     </div>
 </body>

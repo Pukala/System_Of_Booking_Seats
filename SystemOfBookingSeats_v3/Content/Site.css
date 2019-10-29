@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    background-color: #404040;
+    font-family: 'Lato', sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,10 +9,129 @@
     padding-right: 15px;
 }
 
+#Container {
+    border-top: 10px solid #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 960px;
+    min-height: 1000px;
+    background-color: aliceblue;
+    text-align: justify;
+}
+
+#MovieList {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 320px;
+    height: 300px;
+}
+
+#Summit {
+    width: 100px;
+    margin-left: auto;
+    margin-right: 100px;
+}
+
+.label {
+    color: #000000;
+    font-size: 14px;
+    width: 600px;
+}
+
+.movie {
+    width: 320px;
+    min-height: 190px;
+    float: left;
+    border: 5px solid #ffffff;
+    text-align: center;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #000000;
+    padding: 5px;
+}
+
+    .movie:hover {
+        background-color: #ffd800;
+        cursor: pointer;
+    }
+
+#SeatsList {
+    height: 445px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #000000;
+    clear: both;
+}
+
+#spaces {
+    min-height: 100px;
+    background-color: #ffff2f;
+}
+
+#PersonList {
+    margin-top: 0px;
+    height: 270px;
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: aliceblue;
+    float: left;
+    position: relative;
+    margin: 0px 100px 100px 30px
+}
+
+.SeatTrue {
+    min-width: 50px;
+    background-color: #0aae08;
+    min-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    float: left;
+    border: 1px solid #000000;
+    text-align: center;
+}
+
+    .SeatTrue:hover {
+        background-color: #404040;
+        cursor: pointer;
+    }
+
+.SeatFalse {
+    min-width: 50px;
+    background-color: firebrick;
+    min-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    float: left;
+    border: 1px solid #000000;
+    text-align: center;
+}
+
+    .SeatFalse:hover {
+    }
+
+#tv {
+    margin-top: 150px;
+    height: 96px;
+    width: 300px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #000000;
+    text-align: center;
+    position: relative;
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
 }
-

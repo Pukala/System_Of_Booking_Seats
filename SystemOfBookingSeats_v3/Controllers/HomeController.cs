@@ -22,6 +22,11 @@ namespace SystemOfBookingSeats_v3.Controllers
             return View();
         }
 
+        public ActionResult SignIn()
+        {
+            return View();
+        }
+
         public ActionResult Reserve()
         {
             return View();
@@ -43,7 +48,7 @@ namespace SystemOfBookingSeats_v3.Controllers
 
                 DataProcessor.UpdateReservation(personId, model.FirstName, model.LastName, model.EmailAdress, model.SeatNumber);
 
-                return RedirectToAction("Start");
+                return RedirectToAction("SeatsDataMovie1");
             }
 
             return View();

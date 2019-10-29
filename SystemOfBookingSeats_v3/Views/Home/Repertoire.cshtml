@@ -1,4 +1,10 @@
-﻿@{
+﻿
+@{
+    ViewBag.Title = "Repertoire";
+}
+
+
+@{
     ViewBag.Title = "Repertoire";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,12 +13,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/Content/style.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+
     <link href="https://fonts.googleapis.com/css?family=Lato:400,900&display=swap&subset=latin-ext" rel="stylesheet">
 </head>
 <body>
+    <br />
+    <br />
 
-    <div id="content">
+    <div id="content1">
         <div class="movie">
             <a href='@Url.Action("SeatsDataMovie1", "Home")'>
                 <img src='@Url.Content("~/Content/images/Matrix1.jpg")' alt="Matrix" />
