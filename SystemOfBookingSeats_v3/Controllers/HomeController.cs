@@ -11,7 +11,7 @@ namespace SystemOfBookingSeats_v3.Controllers
 {
     public class HomeController : Controller
     {
-
+        private SeatValidator seatValidator;
         public ViewResult Repertoire()
         {
             return View();
@@ -32,9 +32,15 @@ namespace SystemOfBookingSeats_v3.Controllers
             return View();
         }
 
+        public ActionResult ErrorSeats()
+        {
+            return View();
+        }
+
         public ActionResult SeatsDataMovie1()
         {
             var seatsData = DataProcessor.LoadSeatsData();
+            seatValidator = new SeatValidator(seatsData);
             return View(seatsData);
         }
 
@@ -44,14 +50,19 @@ namespace SystemOfBookingSeats_v3.Controllers
         {
             if (ModelState.IsValid)
             {
-                int personId = DataProcessor.FindPersonIdBySeatNumber(model.SeatNumber);
+                var seatsData = DataProcessor.LoadSeatsData();
+                seatValidator = new SeatValidator(seatsData);
+                if (!seatValidator.IsSeatFree(model.SeatNumber))
+                {
+                    int personId = DataProcessor.FindPersonIdBySeatNumber(model.SeatNumber);
 
-                DataProcessor.UpdateReservation(personId, model.FirstName, model.LastName, model.EmailAdress, model.SeatNumber);
+                    DataProcessor.UpdateReservation(personId, model.FirstName, model.LastName, model.EmailAdress, model.SeatNumber);
 
-                return RedirectToAction("SeatsDataMovie1");
+                    return RedirectToAction("SeatsDataMovie1");
+                }
             }
 
-            return View();
+            return RedirectToAction("ErrorSeats");
         }
     }
 }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLibary", "DataLibary\Da
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CinemaDB", "CinemaDB\CinemaDB.sqlproj", "{ED9F22D0-7AA9-478A-B329-C9B0D89E0FCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemOfBookingSeatsTest", "SystemOfBookingSeatsTest\SystemOfBookingSeatsTest.csproj", "{251C4FFE-DB9A-4176-92AF-7C68F6A5970E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{ED9F22D0-7AA9-478A-B329-C9B0D89E0FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED9F22D0-7AA9-478A-B329-C9B0D89E0FCC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED9F22D0-7AA9-478A-B329-C9B0D89E0FCC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{251C4FFE-DB9A-4176-92AF-7C68F6A5970E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{251C4FFE-DB9A-4176-92AF-7C68F6A5970E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{251C4FFE-DB9A-4176-92AF-7C68F6A5970E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{251C4FFE-DB9A-4176-92AF-7C68F6A5970E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

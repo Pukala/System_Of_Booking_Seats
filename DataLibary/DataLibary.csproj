@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLogic\DataProcessor.cs" />
+    <Compile Include="BusinessLogic\SeatValidator.cs" />
     <Compile Include="DataAccess\SqlDataAccess.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SeatModel.cs" />

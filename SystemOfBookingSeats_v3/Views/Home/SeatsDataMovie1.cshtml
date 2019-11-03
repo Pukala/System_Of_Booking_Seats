@@ -7,34 +7,47 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/Content/Site.css" type="text/css" />
+    <meta name="author" content="Przemyslaw Pukala" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/NewStyle.css" />
 </head>
+
 <body>
 
-    <div id="SeatsList">
-        <div id="tv">
-            <img src="~/Content/images/Tv.jpg">
+    <div class="movies">
+        <div class="container">
+
+            <div id="tv">
+                <figure>
+                    <img src="~/Content/images/Tv.jpg">
+                </figure>
+            </div>
         </div>
+        <div id="seats">
 
-        @foreach (var item in Model)
-        {
-            if (item.IsReserve)
+            @foreach (var item in Model)
             {
-                <div class="SeatFalse">
-                    @item.NumberSeat
-                </div>
-            }
-            else
-            {
-                <div class="SeatTrue">
-                    @item.NumberSeat
-                </div>
-            }
-        }
+                if (item.IsReserve)
+                {<div class="seatFalse">
+                        @item.NumberSeat
+                    </div>
+                }
+                else
+                {
+                    <div class="seatTrue">
+                        @item.NumberSeat
+                    </div>
+                }
 
+            }
+        </div>
 
         @Html.Partial("Reserve", new SystemOfBookingSeats_v3.Models.PersonModelUI())
 
+
     </div>
+
+
 </body>
