@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using Dapper.Contrib;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using DataLibary.Models;
+using Dapper.Contrib.Extensions;
 
 namespace DataLibary.DataAccess
 {

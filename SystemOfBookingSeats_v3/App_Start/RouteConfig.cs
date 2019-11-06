@@ -18,6 +18,7 @@ namespace SystemOfBookingSeats_v3
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Start", id = UrlParameter.Optional }
             );
+
         }
     }
 }

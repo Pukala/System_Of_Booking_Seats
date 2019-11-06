@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Administration: Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div id="data">
+    <h1>Edit seat @Model.NumberSeat</h1>
+
+    @using (Html.BeginForm())
+    {
+
+        @Html.EditorForModel()
+        {
+            <input type="submit" value="Save" />
+            <br />
+            <br />
+            @Html.ActionLink("Cancel and back to list", "Manage_Seats")
+        }
+
+    }
+</div>

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DataLibary.DataAccess;
 using DataLibary.Models;
+using System.Data.SqlClient;
+using Dapper.Contrib.Extensions;
 
 namespace DataLibary.BusinessLogic
 {
@@ -45,6 +47,81 @@ namespace DataLibary.BusinessLogic
         {
             string sql = "select * from dbo.SeatsTable; ";
             return SqlDataAccess.LoadData<SeatModel>(sql);
+        }
+
+        public static SeatModel LoadSeatData(int id)
+        {
+            string sql = @"select * from dbo.SeatsTable where dbo.SeatsTable.SeatId = " + id + ";";
+
+            return SqlDataAccess.LoadData<SeatModel>(sql).ElementAt(0);
+        }
+
+        public static void UpdateSeatData(int seatId, int personId, bool iReserve, int numberSeat)
+        {
+            SeatModel data = new SeatModel
+            {
+                SeatId = seatId,
+                PersonId = personId,
+                IsReserve = iReserve,
+                NumberSeat = numberSeat
+            };
+
+            string sql = @"UPDATE dbo.SeatsTable SET PersonId = @PersonId, 
+                                 IsReserve = @IsReserve, NumberSeat = @NumberSeat WHERE seatId = @seatId;";
+
+            SqlDataAccess.SaveData(sql, data);
+        }
+
+        public static SeatModel GetLastSeatModel()
+        {
+            string sql = "select top 1 * from dbo.SeatsTable order by SeatId desc;";
+            return SqlDataAccess.LoadData<SeatModel>(sql).ToList().ElementAt(0);
+        }
+
+        public static PersonModel GetLastPersonModel()
+        {
+            string sql = "select top 1 * from dbo.Person order by Id desc;";
+            return SqlDataAccess.LoadData<PersonModel>(sql).ToList().ElementAt(0);
+        }
+
+        public static void DeleteReservationData(int seatId)
+        {
+            int personId = LoadSeatData(seatId).PersonId;
+            string sql = "delete from dbo.SeatsTable where SeatId = " + seatId + ";";
+            SqlDataAccess.SaveData(sql, new SeatModel());
+            sql = "delete from dbo.Person where Id = " + personId + ";";
+            SqlDataAccess.SaveData(sql, new PersonModel());
+        }
+
+        public static void InsertSeatModelElement(int numberSeat, bool isReserve, int personId)
+        {
+            SeatModel data = new SeatModel
+            {
+                PersonId = personId,
+                IsReserve = isReserve,
+                NumberSeat = numberSeat
+            };
+            string sql = @"insert into dbo.SeatsTable (PersonId, IsReserve, NumberSeat) 
+                           values(@PersonId, @IsReserve, @NumberSeat);";
+
+            SqlDataAccess.SaveData(sql, data);
+        }
+
+
+        public static void InsertPersonModelElement(int seatNumber,
+            string firstName = "none", string lastName = "none", string emailAdress = "None")
+        {
+            PersonModel data = new PersonModel
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                EmailAdress = emailAdress,
+                SeatNumber = seatNumber
+            };
+            string sql = @"insert into dbo.Person (FirstName, LastName, EmailAdress, SeatNumber) 
+                           values(@FirstName, @LastName, @EmailAdress, @SeatNumber);";
+
+            SqlDataAccess.SaveData(sql, data);
         }
     }
 }

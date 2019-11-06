@@ -3,6 +3,7 @@ using DataLibary.BusinessLogic;
 using DataLibary.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using Moq;
 
 namespace SystemOfBookingSeatsTest
 {
@@ -23,11 +24,12 @@ namespace SystemOfBookingSeatsTest
 
             SeatValidator validator = new SeatValidator(Seats);
 
-            Assert.IsTrue(validator.IsSeatFree(1) == false);
-            Assert.IsTrue(validator.IsSeatFree(2) == false);
-            Assert.IsTrue(validator.IsSeatFree(3) == true);
-            Assert.IsTrue(validator.IsSeatFree(4) == false);
-            Assert.IsTrue(validator.IsSeatFree(5) == true);
+            Assert.IsTrue(validator.IsSeatValid(1) == true);
+            Assert.IsTrue(validator.IsSeatValid(2) == true);
+            Assert.IsTrue(validator.IsSeatValid(3) == false);
+            Assert.IsTrue(validator.IsSeatValid(4) == true);
+            Assert.IsTrue(validator.IsSeatValid(5) == false);
+            Assert.IsTrue(validator.IsSeatValid(22) == false);
         }
     }
 }

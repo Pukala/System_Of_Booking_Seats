@@ -16,13 +16,30 @@ namespace DataLibary.BusinessLogic
             Seats = seats;
         }
 
-        public bool IsSeatFree(int numOfSeat)
+        public bool IsSeatValid(int numOfSeat)
+        {
+            return !IsSeatFree(numOfSeat) && IsSeatNumberValid(numOfSeat);
+        }
+
+        private bool IsSeatFree(int numOfSeat)
         {
             if (numOfSeat <= Seats.Count())
             {
                 return Seats[numOfSeat - 1].IsReserve;
             }
             return false;
+        }
+
+        private bool IsSeatNumberValid(int numOfSeat)
+        {
+            if (numOfSeat <= Seats.Count() && numOfSeat >= 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

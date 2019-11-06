@@ -12,7 +12,7 @@ namespace SystemOfBookingSeats_v3.Controllers
     public class HomeController : Controller
     {
         private SeatValidator seatValidator;
-        public ViewResult Repertoire()
+        public ViewResult Movies()
         {
             return View();
         }
@@ -52,7 +52,7 @@ namespace SystemOfBookingSeats_v3.Controllers
             {
                 var seatsData = DataProcessor.LoadSeatsData();
                 seatValidator = new SeatValidator(seatsData);
-                if (!seatValidator.IsSeatFree(model.SeatNumber))
+                if (seatValidator.IsSeatValid(model.SeatNumber))
                 {
                     int personId = DataProcessor.FindPersonIdBySeatNumber(model.SeatNumber);
 
@@ -61,7 +61,6 @@ namespace SystemOfBookingSeats_v3.Controllers
                     return RedirectToAction("SeatsDataMovie1");
                 }
             }
-
             return RedirectToAction("ErrorSeats");
         }
     }

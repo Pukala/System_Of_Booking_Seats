@@ -1,0 +1,44 @@
+﻿@model IEnumerable<DataLibary.Models.SeatModel>
+
+@{
+    ViewBag.Title = "Administration: Manage Seats";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br />
+<br />
+
+<div>
+    <div class="panel-heading">
+        <h3>Seats Data</h3>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.SeatId)</th>
+            <th>@Html.DisplayNameFor(model => model.PersonId)</th>
+            <th>@Html.DisplayNameFor(model => model.IsReserve)</th>
+            <th>@Html.DisplayNameFor(model => model.NumberSeat)</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.SeatId)</td>
+                <td>@Html.DisplayFor(modelItem => item.PersonId)</td>
+                <td>@Html.DisplayFor(modelItem => item.IsReserve)</td>
+                <td>@Html.DisplayFor(modelItem => item.NumberSeat)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SeatId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SeatId })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="panel-footer">
+        @Html.ActionLink("Create New", "CreateSeat", null, new { @class = "btn btn-default" })
+    </div>
+
+</div>
