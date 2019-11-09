@@ -3,6 +3,7 @@ using DataLibary.DataAccess;
 using DataLibary.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,7 @@ using SystemOfBookingSeats_v3.Models;
 
 namespace SystemOfBookingSeats_v3.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         public ActionResult Start()
@@ -84,6 +86,37 @@ namespace SystemOfBookingSeats_v3.Controllers
             {
                 return View(seatModelUI);
             }
+        }
+
+        //public ViewResult CreateMovieData()
+        //{
+        //    MovieModelUI movie = new MovieModelUI();
+        //    return View(movie);
+        //}
+
+        [HttpPost]
+        public ViewResult CreateMovieData(MovieModelUI movieModel, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(movieModel.File.FileName);
+                    string imgPath = Path.Combine(Server.MapPath("~/Content/MoviesImages/"), fileName);
+                    file.SaveAs(imgPath);
+                }
+
+                MovieModel data = new MovieModel
+                {
+                    NameOfMovie = movieModel.NameOfMovie,
+                    ImagePath = "~/Content/MoviesImages/" + file.FileName
+                };
+
+                DataProcessor.InsertMovieData(data);
+
+                return View();
+            }
+            return View();
         }
     }
 }

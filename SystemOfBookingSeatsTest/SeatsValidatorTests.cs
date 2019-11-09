@@ -8,7 +8,7 @@ using Moq;
 namespace SystemOfBookingSeatsTest
 {
     [TestClass]
-    public class UnitTest1
+    public class SeatsValidatorTests
     {
         [TestMethod]
         public void IsFreeSeatTest()

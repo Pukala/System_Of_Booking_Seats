@@ -7,6 +7,10 @@ using DataLibary.DataAccess;
 using DataLibary.Models;
 using System.Data.SqlClient;
 using Dapper.Contrib.Extensions;
+using System.Web;
+using System.IO;
+using System.Configuration;
+using System.Data;
 
 namespace DataLibary.BusinessLogic
 {
@@ -120,6 +124,14 @@ namespace DataLibary.BusinessLogic
             };
             string sql = @"insert into dbo.Person (FirstName, LastName, EmailAdress, SeatNumber) 
                            values(@FirstName, @LastName, @EmailAdress, @SeatNumber);";
+
+            SqlDataAccess.SaveData(sql, data);
+        }
+
+        public static void InsertMovieData(MovieModel data)
+        {
+            string sql = @"insert into dbo.MovieDataTable (NameOfMovie, ImagePath)
+                        values(@NameOfMovie, @ImagePath);";
 
             SqlDataAccess.SaveData(sql, data);
         }

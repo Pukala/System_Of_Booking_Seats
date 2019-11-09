@@ -68,6 +68,7 @@
     <Build Include="dbo\Tables\SeatsTable.sql" />
     <Build Include="dbo\Views\FullSeatData.sql" />
     <Build Include="dbo\Stored Procedures\spPerson_FilterByLastName.sql" />
+    <Build Include="dbo\Tables\MovieDataTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CinemaDB.refactorlog" />
