@@ -161,6 +161,7 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Admin\CreateSeat.cshtml" />
+    <Content Include="Views\Admin\CreateMovieData.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

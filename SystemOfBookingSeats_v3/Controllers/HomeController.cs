@@ -22,11 +22,6 @@ namespace SystemOfBookingSeats_v3.Controllers
             return View();
         }
 
-        public ActionResult SignIn()
-        {
-            return View();
-        }
-
         public ActionResult Reserve()
         {
             return View();
@@ -41,6 +36,7 @@ namespace SystemOfBookingSeats_v3.Controllers
         {
             var seatsData = DataProcessor.LoadSeatsData();
             seatValidator = new SeatValidator(seatsData);
+
             return View(seatsData);
         }
 

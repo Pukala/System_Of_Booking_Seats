@@ -88,34 +88,30 @@ namespace SystemOfBookingSeats_v3.Controllers
             }
         }
 
-        //public ViewResult CreateMovieData()
-        //{
-        //    MovieModelUI movie = new MovieModelUI();
-        //    return View(movie);
-        //}
+        public ViewResult CreateMovieData()
+        {
+            MovieModelUI movie = new MovieModelUI();
+            return View(movie);
+        }
 
         [HttpPost]
         public ViewResult CreateMovieData(MovieModelUI movieModel, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid)
+            if (file != null && file.ContentLength > 0)
             {
-                if (file != null && file.ContentLength > 0)
-                {
-                    string fileName = Path.GetFileName(movieModel.File.FileName);
-                    string imgPath = Path.Combine(Server.MapPath("~/Content/MoviesImages/"), fileName);
-                    file.SaveAs(imgPath);
-                }
-
-                MovieModel data = new MovieModel
-                {
-                    NameOfMovie = movieModel.NameOfMovie,
-                    ImagePath = "~/Content/MoviesImages/" + file.FileName
-                };
-
-                DataProcessor.InsertMovieData(data);
-
-                return View();
+                string fileName = Path.GetFileName(movieModel.File.FileName);
+                string imgPath = Path.Combine(Server.MapPath("~/Content/MoviesImages/"), fileName);
+                file.SaveAs(imgPath);
             }
+
+            MovieModel data = new MovieModel
+            {
+                NameOfMovie = movieModel.NameOfMovie,
+                ImagePath = "~/Content/MoviesImages/" + file.FileName
+            };
+
+            DataProcessor.InsertMovieData(data);
+
             return View();
         }
     }
