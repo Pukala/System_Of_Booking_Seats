@@ -6,39 +6,33 @@
 }
 <br />
 <br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
-<div>
-    <div class="panel-heading">
-        <h3>Seats Data</h3>
+
+
+<div id="data">
+    <div class="edit">
+        @Html.ActionLink("Manage Seats for movie One", "EditSeats", new { id = 1 })
     </div>
-
-    <table class="table">
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.SeatId)</th>
-            <th>@Html.DisplayNameFor(model => model.PersonId)</th>
-            <th>@Html.DisplayNameFor(model => model.IsReserve)</th>
-            <th>@Html.DisplayNameFor(model => model.NumberSeat)</th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.SeatId)</td>
-                <td>@Html.DisplayFor(modelItem => item.PersonId)</td>
-                <td>@Html.DisplayFor(modelItem => item.IsReserve)</td>
-                <td>@Html.DisplayFor(modelItem => item.NumberSeat)</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.SeatId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.SeatId })
-                </td>
-            </tr>
-        }
-
-    </table>
-
-    <div class="panel-footer">
-        @Html.ActionLink("Create New", "CreateSeat", null, new { @class = "btn btn-default" })
+    <div class="edit">
+        @Html.ActionLink("Manage Seats for movie two", "EditSeats", new { id = 2 })
+    </div>
+    <div class="edit">
+        @Html.ActionLink("Manage Seats for movie three", "EditSeats", new { id = 3 })
+    </div>
+    <div class="edit">
+        @Html.ActionLink("Manage Seats for movie four", "EditSeats", new { id = 4 })
+    </div>
+    <div class="edit">
+        @Html.ActionLink("Manage Seats for movie five", "EditSeats", new { id = 5 })
+    </div>
+    <div class="edit">
+        @Html.ActionLink("Manage Seats for movie six", "EditSeats", new { id = 6 })
     </div>
 
 </div>

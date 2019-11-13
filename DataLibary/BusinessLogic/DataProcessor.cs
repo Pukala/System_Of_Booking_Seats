@@ -47,9 +47,9 @@ namespace DataLibary.BusinessLogic
         }
 
 
-        public static List<SeatModel> LoadSeatsData()
+        public static List<SeatModel> LoadSeatsData(int id)
         {
-            string sql = "select * from dbo.SeatsTable; ";
+            string sql = "select * from dbo.SeatsTable where dbo.SeatsTable.MovieId = " + id + ";";
             return SqlDataAccess.LoadData<SeatModel>(sql);
         }
 

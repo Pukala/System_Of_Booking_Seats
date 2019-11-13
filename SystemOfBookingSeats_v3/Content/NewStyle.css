@@ -91,6 +91,27 @@
     width: 200px;
 }
 
+.edit {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 50px;
+    background-color: darkgray;
+    border: 2px solid #000000;
+    text-align: center;
+    justify-content: center;
+    padding-top: 8px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+    .edit:hover {
+        background-color: #404040;
+        cursor: pointer;
+    }
+
+
 .title {
     margin-top: 8px;
 }

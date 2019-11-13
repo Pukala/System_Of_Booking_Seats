@@ -21,7 +21,12 @@ namespace SystemOfBookingSeats_v3.Controllers
 
         public ActionResult Manage_Seats()
         {
-            var seatsData = DataProcessor.LoadSeatsData();
+            return View();
+        }
+
+        public ActionResult EditSeats(int id)
+        {
+            var seatsData = DataProcessor.LoadSeatsData(id);
             return View(seatsData);
         }
 

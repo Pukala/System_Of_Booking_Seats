@@ -36,7 +36,7 @@ namespace SystemOfBookingSeats_v3.Controllers
 
         public ActionResult SeatsDataMovie1(int id)
         {
-            var seatsData = DataProcessor.LoadSeatsData();
+            var seatsData = DataProcessor.LoadSeatsData(id);
             seatValidator = new SeatValidator(seatsData);
 
             return View(seatsData);
@@ -48,7 +48,7 @@ namespace SystemOfBookingSeats_v3.Controllers
         {
             if (ModelState.IsValid)
             {
-                var seatsData = DataProcessor.LoadSeatsData();
+                var seatsData = DataProcessor.LoadSeatsData(1); // to do
                 seatValidator = new SeatValidator(seatsData);
                 if (seatValidator.IsSeatValid(model.SeatNumber))
                 {
