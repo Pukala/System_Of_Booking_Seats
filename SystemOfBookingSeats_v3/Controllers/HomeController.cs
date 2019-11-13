@@ -12,9 +12,11 @@ namespace SystemOfBookingSeats_v3.Controllers
     public class HomeController : Controller
     {
         private SeatValidator seatValidator;
+
         public ViewResult Movies()
         {
-            return View();
+            var movieData = DataProcessor.LoadMoviesData();
+            return View(movieData);
         }
 
         public ActionResult Start()
@@ -32,7 +34,7 @@ namespace SystemOfBookingSeats_v3.Controllers
             return View();
         }
 
-        public ActionResult SeatsDataMovie1()
+        public ActionResult SeatsDataMovie1(int id)
         {
             var seatsData = DataProcessor.LoadSeatsData();
             seatValidator = new SeatValidator(seatsData);

@@ -5,13 +5,14 @@
 
 .movies {
     margin-top: 100px;
+    margin-bottom: 50px;
     text-align: center;
     font-size: 17px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
     .movies img {
-        margin-top: 8px;
+        margin-top: 20px;
         width: 100%;
         height: auto;
     }

@@ -135,5 +135,11 @@ namespace DataLibary.BusinessLogic
 
             SqlDataAccess.SaveData(sql, data);
         }
+
+        public static List<MovieModel> LoadMoviesData()
+        {
+            string sql = "select * from dbo.MovieDataTable;";
+            return SqlDataAccess.LoadData<MovieModel>(sql).ToList();
+        }
     }
 }

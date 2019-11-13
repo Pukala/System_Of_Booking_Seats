@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<DataLibary.Models.MovieModel>
+
+@{
     ViewBag.Title = "Repertoire";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -18,85 +20,57 @@
     <div class="movies">
         <div class="container">
             <div class="row">
-
                 <div class="col-sm-4">
                     <figure>
-                        <a href='@Url.Action("SeatsDataMovie1", "Home")'>
-                            <img src='@Url.Content("~/Content/images/Matrix1.jpg")' />
+                        <a href='@Url.Action("SeatsDataMovie1", "Home", new { id = 1 })'>
+                            <img src='@Url.Content(Model.ElementAt(0).ImagePath)' />
                         </a>
-                        <div class="title">Matrix</div>
+
                     </figure>
                 </div>
 
                 <div class="col-sm-4">
                     <figure>
-                        <a href='@Url.Action("SeatsDataMovie1", "Home")'>
-                            <img src='@Url.Content("~/Content/images/Matrix1.jpg")' />
+                        <a href='@Url.Action("SeatsDataMovie1", "Home", new { id = 2 })'>
+                            <img src='@Url.Content(Model.ElementAt(1).ImagePath)' />
                         </a>
-                        <div class="title">Matrix</div>
+
                     </figure>
                 </div>
 
                 <div class="col-sm-4">
                     <figure>
-                        <a href='@Url.Action("SeatsDataMovie1", "Home")'>
-                            <img src='@Url.Content("~/Content/images/Matrix1.jpg")' />
+                        <a href='@Url.Action("SeatsDataMovie1", "Home", new { id = 3 })'>
+                            <img src='@Url.Content(Model.ElementAt(2).ImagePath)' />
                         </a>
-                        <div class="title">Matrix</div>
+
                     </figure>
                 </div>
 
                 <div class="col-sm-4">
                     <figure>
-                        <a href='@Url.Action("SeatsDataMovie1", "Home")'>
-                            <img src='@Url.Content("~/Content/images/Matrix1.jpg")' />
+                        <a href='@Url.Action("SeatsDataMovie1", "Home", new { id = 4 })'>
+                            <img src='@Url.Content(Model.ElementAt(3).ImagePath)' />
                         </a>
-                        <div class="title">Matrix</div>
+
                     </figure>
                 </div>
 
                 <div class="col-sm-4">
                     <figure>
-                        <a href='@Url.Action("SeatsDataMovie1", "Home")'>
-                            <img src='@Url.Content("~/Content/images/Matrix1.jpg")' />
+                        <a href='@Url.Action("SeatsDataMovie1", "Home", new { id = 5 })'>
+                            <img src='@Url.Content(Model.ElementAt(4).ImagePath)' />
                         </a>
-                        <div class="title">Matrix</div>
+
                     </figure>
                 </div>
 
                 <div class="col-sm-4">
                     <figure>
-                        <a href='@Url.Action("SeatsDataMovie1", "Home")'>
-                            <img src='@Url.Content("~/Content/images/Matrix1.jpg")' />
+                        <a href='@Url.Action("SeatsDataMovie1", "Home", new { id = 6 })'>
+                            <img src='@Url.Content(Model.ElementAt(5).ImagePath)' />
                         </a>
-                        <div class="title">Matrix</div>
-                    </figure>
-                </div>
 
-                <div class="col-sm-4">
-                    <figure>
-                        <a href='@Url.Action("SeatsDataMovie1", "Home")'>
-                            <img src='@Url.Content("~/Content/images/Matrix1.jpg")' />
-                        </a>
-                        <div class="title">Matrix</div>
-                    </figure>
-                </div>
-
-                <div class="col-sm-4">
-                    <figure>
-                        <a href='@Url.Action("SeatsDataMovie1", "Home")'>
-                            <img src='@Url.Content("~/Content/images/Matrix1.jpg")' />
-                        </a>
-                        <div class="title">Matrix</div>
-                    </figure>
-                </div>
-
-                <div class="col-sm-4">
-                    <figure>
-                        <a href='@Url.Action("SeatsDataMovie1", "Home")'>
-                            <img src='@Url.Content("~/Content/images/Matrix1.jpg")' />
-                        </a>
-                        <div class="title">Matrix</div>
                     </figure>
                 </div>
 
