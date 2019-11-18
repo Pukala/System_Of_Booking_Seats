@@ -24,12 +24,13 @@ namespace DataLibary.BusinessLogic
             return SqlDataAccess.LoadData<SeatModel>(sql).ElementAt(0).PersonId;
         }
 
-        public static void UpdateReservation(int id,
+        public static void UpdateReservation(
             string firstName, string lastName, string emailAddress, int seatNumber)
         {
+            int personId = DataProcessor.FindPersonIdBySeatNumber(seatNumber);
             PersonModel data = new PersonModel
             {
-                Id = id,
+                Id = personId,
                 FirstName = firstName,
                 LastName = lastName,
                 EmailAdress = emailAddress,
@@ -76,6 +77,13 @@ namespace DataLibary.BusinessLogic
             SqlDataAccess.SaveData(sql, data);
         }
 
+        public static void InsertSeatAndPerson(SeatModel seatModel)
+        {
+            InsertPersonModelElement(seatModel.NumberSeat);
+            InsertSeatModelElement(
+                seatModel.NumberSeat, seatModel.IsReserve, GetLastPersonModel().Id, seatModel.MovieId);
+        }
+
         public static SeatModel GetLastSeatModel()
         {
             string sql = "select top 1 * from dbo.SeatsTable order by SeatId desc;";
@@ -97,16 +105,17 @@ namespace DataLibary.BusinessLogic
             SqlDataAccess.SaveData(sql, new PersonModel());
         }
 
-        public static void InsertSeatModelElement(int numberSeat, bool isReserve, int personId)
+        public static void InsertSeatModelElement(int numberSeat, bool isReserve, int personId, int movieId)
         {
             SeatModel data = new SeatModel
             {
                 PersonId = personId,
                 IsReserve = isReserve,
-                NumberSeat = numberSeat
+                NumberSeat = numberSeat,
+                MovieId = movieId
             };
-            string sql = @"insert into dbo.SeatsTable (PersonId, IsReserve, NumberSeat) 
-                           values(@PersonId, @IsReserve, @NumberSeat);";
+            string sql = @"insert into dbo.SeatsTable (PersonId, IsReserve, NumberSeat, MovieId) 
+                           values(@PersonId, @IsReserve, @NumberSeat, @MovieId);";
 
             SqlDataAccess.SaveData(sql, data);
         }

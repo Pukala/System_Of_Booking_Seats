@@ -11,7 +11,8 @@ namespace SystemOfBookingSeats_v3.Controllers
 {
     public class HomeController : Controller
     {
-        private SeatValidator seatValidator;
+        private static int MovieId { get; set; }
+        private static SeatValidator seatValidator;
 
         public ViewResult Movies()
         {
@@ -34,32 +35,30 @@ namespace SystemOfBookingSeats_v3.Controllers
             return View();
         }
 
-        public ActionResult SeatsDataMovie1(int id)
+        public ActionResult SeatsDataMovie(int id)
         {
             var seatsData = DataProcessor.LoadSeatsData(id);
             seatValidator = new SeatValidator(seatsData);
+            MovieId = id;
 
             return View(seatsData);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SeatsDataMovie1(PersonModelUI model)
+        public ActionResult SeatsDataMovie(PersonModelUI model)
         {
             if (ModelState.IsValid)
             {
-                var seatsData = DataProcessor.LoadSeatsData(1); // to do
-                seatValidator = new SeatValidator(seatsData);
                 if (seatValidator.IsSeatValid(model.SeatNumber))
                 {
-                    int personId = DataProcessor.FindPersonIdBySeatNumber(model.SeatNumber);
+                    DataProcessor.UpdateReservation(model.FirstName, model.LastName, model.EmailAdress, model.SeatNumber);
 
-                    DataProcessor.UpdateReservation(personId, model.FirstName, model.LastName, model.EmailAdress, model.SeatNumber);
-
-                    return RedirectToAction("SeatsDataMovie1");
+                    return RedirectToAction("SeatsDataMovie");
                 }
             }
             return RedirectToAction("ErrorSeats");
         }
+
     }
 }

@@ -151,7 +151,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Start.cshtml" />
-    <Content Include="Views\Home\SeatsDataMovie1.cshtml" />
+    <Content Include="Views\Home\SeatsDataMovie.cshtml" />
     <Content Include="Views\Home\Movies.cshtml" />
     <Content Include="Views\Home\Reserve.cshtml" />
     <Content Include="Views\Home\ErrorSeats.cshtml" />

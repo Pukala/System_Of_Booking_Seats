@@ -14,6 +14,8 @@ namespace SystemOfBookingSeats_v3.Controllers
     [Authorize]
     public class AdminController : Controller
     {
+        private static int MoId;
+        private static List<SeatModel> SeatsData;
         public ActionResult Start()
         {
             return View();
@@ -26,13 +28,14 @@ namespace SystemOfBookingSeats_v3.Controllers
 
         public ActionResult EditSeats(int id)
         {
-            var seatsData = DataProcessor.LoadSeatsData(id);
-            return View(seatsData);
+            SeatsData = DataProcessor.LoadSeatsData(id);
+            MoId = id;
+            return View(SeatsData);
         }
 
         public ViewResult Edit(int id)
         {
-            SeatModel data = DataProcessor.LoadSeatData(id);
+            var data = SeatsData.Find(m => m.PersonId == id);
 
             SeatModelUI seatData = new SeatModelUI
             {
@@ -69,7 +72,7 @@ namespace SystemOfBookingSeats_v3.Controllers
         public ViewResult CreateSeat()
         {
             SeatModelUI seatData = new SeatModelUI
-            { NumberSeat = DataProcessor.GetLastSeatModel().NumberSeat + 1 };
+            { NumberSeat = SeatsData.Count() + 1 };
 
             return View(seatData);
         }
@@ -79,11 +82,15 @@ namespace SystemOfBookingSeats_v3.Controllers
         {
             if (ModelState.IsValid)
             {
+                SeatModel seatModel = new SeatModel
+                {
+                    IsReserve = seatModelUI.IsReserve,
+                    PersonId = SeatsData.LastOrDefault().PersonId,
+                    MovieId = MoId,
+                    NumberSeat = seatModelUI.NumberSeat
+                };
 
-                DataProcessor.InsertPersonModelElement(seatModelUI.NumberSeat);
-                DataProcessor.InsertSeatModelElement(
-                    seatModelUI.NumberSeat, seatModelUI.IsReserve, DataProcessor.GetLastPersonModel().Id);
-
+                DataProcessor.InsertSeatAndPerson(seatModel);
 
                 return RedirectToAction("Manage_Seats");
             }
