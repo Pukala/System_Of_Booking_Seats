@@ -16,21 +16,21 @@ namespace DataLibary.BusinessLogic
 {
     public static class DataProcessor
     {
-        public static int FindPersonIdBySeatNumber(int seatNumber)
+
+
+        public static int FindPersonBySeatNumber(int seatNumber)
         {
 
             string sql = @"select * from dbo.SeatsTable where dbo.SeatsTable.NumberSeat = " + seatNumber + ";";
 
-            return SqlDataAccess.LoadData<SeatModel>(sql).ElementAt(0).PersonId;
+            return SqlDataAccess.LoadData<SeatModel>(sql).ElementAt(0).NumberSeat;
         }
 
         public static void UpdateReservation(
             string firstName, string lastName, string emailAddress, int seatNumber)
         {
-            int personId = DataProcessor.FindPersonIdBySeatNumber(seatNumber);
             PersonModel data = new PersonModel
             {
-                Id = personId,
                 FirstName = firstName,
                 LastName = lastName,
                 EmailAdress = emailAddress,
@@ -38,7 +38,7 @@ namespace DataLibary.BusinessLogic
             };
 
             string sql = @"UPDATE dbo.Person SET FirstName = @FirstName, LastName = @LastName, 
-                                EmailAdress = '" + emailAddress + "', SeatNumber = @SeatNumber WHERE Id = @Id;";
+                                EmailAdress = '" + emailAddress + "', SeatNumber = @SeatNumber WHERE @SeatNumber = " + seatNumber + ";";
             SqlDataAccess.SaveData(sql, data);
 
 
@@ -48,31 +48,69 @@ namespace DataLibary.BusinessLogic
         }
 
 
-        public static List<SeatModel> LoadSeatsData(int id)
+        public static List<SeatModel> LoadSeatsData(int movieNumber)
         {
-            string sql = "select * from dbo.SeatsTable where dbo.SeatsTable.MovieId = " + id + ";";
-            return SqlDataAccess.LoadData<SeatModel>(sql);
+            string sql = "select * from dbo.SeatsTable where dbo.SeatsTable.MovieId = " + movieNumber + ";";
+            var data = SqlDataAccess.LoadData<SeatModel>(sql);
+
+            if (data.Count() == 0)
+            {
+                return CreateDummySeatsData(movieNumber);
+            }
+
+            return data;
         }
 
-        public static SeatModel LoadSeatData(int id)
+        private static void FillSeatsTableWithDummyData(List<SeatModel> seatModels)
         {
-            string sql = @"select * from dbo.SeatsTable where dbo.SeatsTable.SeatId = " + id + ";";
+            string sql;
+
+            foreach (SeatModel model in seatModels)
+            {
+                sql = @"INSERT INTO dbo.SeatsTable (PersonId, IsReserve, NumberSeat, MovieId);";
+
+                SqlDataAccess.SaveData(sql, model);
+            }
+        }
+
+        private static List<SeatModel> CreateDummySeatsData(int movieNumber)
+        {
+            List<SeatModel> dummyData = new List<SeatModel>();
+            {
+                SeatModel seatModel;
+                for (int i = 0; i < 42; i++)
+                {
+                    seatModel = new SeatModel
+                    {
+                        IsReserve = false,
+                        MovieId = movieNumber,
+                        NumberSeat = i + 1,
+                        PersonId = null
+                    };
+                    dummyData.Add(seatModel);
+                }
+            };
+            return dummyData;
+        }
+
+        public static SeatModel LoadSeatData(int seatNumber)
+        {
+            string sql = @"select * from dbo.SeatsTable where dbo.SeatsTable.NumberSeat = " + seatNumber + ";";
 
             return SqlDataAccess.LoadData<SeatModel>(sql).ElementAt(0);
         }
 
-        public static void UpdateSeatData(int seatId, int personId, bool iReserve, int numberSeat)
+        public static void UpdateSeatData(int personId, bool iReserve, int numberSeat)
         {
             SeatModel data = new SeatModel
             {
-                SeatId = seatId,
                 PersonId = personId,
                 IsReserve = iReserve,
                 NumberSeat = numberSeat
             };
 
             string sql = @"UPDATE dbo.SeatsTable SET PersonId = @PersonId, 
-                                 IsReserve = @IsReserve, NumberSeat = @NumberSeat WHERE seatId = @seatId;";
+                                 IsReserve = @IsReserve, NumberSeat = @NumberSeat WHERE NumberSeat = @NumberSeat;";
 
             SqlDataAccess.SaveData(sql, data);
         }
@@ -86,7 +124,7 @@ namespace DataLibary.BusinessLogic
 
         public static SeatModel GetLastSeatModel()
         {
-            string sql = "select top 1 * from dbo.SeatsTable order by SeatId desc;";
+            string sql = "select top 1 * from dbo.SeatsTable order by NumberSeat desc;";
             return SqlDataAccess.LoadData<SeatModel>(sql).ToList().ElementAt(0);
         }
 
@@ -96,12 +134,11 @@ namespace DataLibary.BusinessLogic
             return SqlDataAccess.LoadData<PersonModel>(sql).ToList().ElementAt(0);
         }
 
-        public static void DeleteReservationData(int seatId)
+        public static void DeleteReservationData(int numberSeat)
         {
-            int personId = LoadSeatData(seatId).PersonId;
-            string sql = "delete from dbo.SeatsTable where SeatId = " + seatId + ";";
+            string sql = "delete from dbo.SeatsTable where NumberSeat = " + numberSeat + ";";
             SqlDataAccess.SaveData(sql, new SeatModel());
-            sql = "delete from dbo.Person where Id = " + personId + ";";
+            sql = "delete from dbo.Person where SeatNumber = " + numberSeat + ";";
             SqlDataAccess.SaveData(sql, new PersonModel());
         }
 

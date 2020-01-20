@@ -5,5 +5,4 @@
     [IsReserve] BIT NULL, 
     [NumberSeat] INT NULL, 
     [MovieId] INT NULL, 
-    CONSTRAINT [FK_SeatsTable_Person] FOREIGN KEY (PersonId) REFERENCES Person(Id)
 )

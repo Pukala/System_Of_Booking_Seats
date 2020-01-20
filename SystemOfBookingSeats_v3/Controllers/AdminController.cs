@@ -39,8 +39,7 @@ namespace SystemOfBookingSeats_v3.Controllers
 
             SeatModelUI seatData = new SeatModelUI
             {
-                SeatId = data.SeatId,
-                PersonId = data.PersonId,
+                PersonId = data.PersonId ?? default(int),
                 IsReserve = data.IsReserve,
                 NumberSeat = data.NumberSeat
             };
@@ -59,7 +58,7 @@ namespace SystemOfBookingSeats_v3.Controllers
         {
             if (ModelState.IsValid)
             {
-                DataProcessor.UpdateSeatData(seatModelUI.SeatId, seatModelUI.PersonId, seatModelUI.IsReserve
+                DataProcessor.UpdateSeatData(/*seatModelUI.SeatId,*/ seatModelUI.PersonId, seatModelUI.IsReserve
                     , seatModelUI.NumberSeat);
                 return RedirectToAction("Manage_Seats");
             }
