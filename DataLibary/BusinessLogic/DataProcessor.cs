@@ -29,22 +29,12 @@ namespace DataLibary.BusinessLogic
         public static void UpdateReservation(
             string firstName, string lastName, string emailAddress, int seatNumber)
         {
-            PersonModel data = new PersonModel
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                EmailAdress = emailAddress,
-                SeatNumber = seatNumber
-            };
+            InsertPersonModelElement(seatNumber, firstName, lastName, emailAddress);
+            var lastPerson = GetLastPersonModel();
 
-            string sql = @"UPDATE dbo.Person SET FirstName = @FirstName, LastName = @LastName, 
-                                EmailAdress = '" + emailAddress + "', SeatNumber = @SeatNumber WHERE @SeatNumber = " + seatNumber + ";";
-            SqlDataAccess.SaveData(sql, data);
-
-
-            sql = @"UPDATE dbo.SeatsTable SET IsReserve = " + 1 +
+            string sql = @"UPDATE dbo.SeatsTable SET IsReserve = " + 1 + ", PersonId = " + lastPerson.Id +
             " WHERE NumberSeat = @seatNumber;";
-            SqlDataAccess.SaveData(sql, data);
+            SqlDataAccess.SaveData(sql, lastPerson);
         }
 
 
@@ -55,25 +45,13 @@ namespace DataLibary.BusinessLogic
 
             if (data.Count() == 0)
             {
-                return CreateDummySeatsData(movieNumber);
+                return CreateAndFillDummySeatsData(movieNumber);
             }
 
             return data;
         }
 
-        private static void FillSeatsTableWithDummyData(List<SeatModel> seatModels)
-        {
-            string sql;
-
-            foreach (SeatModel model in seatModels)
-            {
-                sql = @"INSERT INTO dbo.SeatsTable (PersonId, IsReserve, NumberSeat, MovieId);";
-
-                SqlDataAccess.SaveData(sql, model);
-            }
-        }
-
-        private static List<SeatModel> CreateDummySeatsData(int movieNumber)
+        private static List<SeatModel> CreateAndFillDummySeatsData(int movieNumber)
         {
             List<SeatModel> dummyData = new List<SeatModel>();
             {
@@ -88,6 +66,8 @@ namespace DataLibary.BusinessLogic
                         PersonId = null
                     };
                     dummyData.Add(seatModel);
+                    InsertSeatModelElement(seatModel.NumberSeat, seatModel.IsReserve,
+                        seatModel.PersonId ?? default(int), seatModel.MovieId);
                 }
             };
             return dummyData;
@@ -115,12 +95,12 @@ namespace DataLibary.BusinessLogic
             SqlDataAccess.SaveData(sql, data);
         }
 
-        public static void InsertSeatAndPerson(SeatModel seatModel)
-        {
-            InsertPersonModelElement(seatModel.NumberSeat);
-            InsertSeatModelElement(
-                seatModel.NumberSeat, seatModel.IsReserve, GetLastPersonModel().Id, seatModel.MovieId);
-        }
+        //public static void InsertSeatAndPerson(SeatModel seatModel)
+        //{
+        //    InsertPersonModelElement(seatModel.NumberSeat);
+        //    InsertSeatModelElement(
+        //        seatModel.NumberSeat, seatModel.IsReserve, GetLastPersonModel().Id, seatModel.MovieId);
+        //}
 
         public static SeatModel GetLastSeatModel()
         {
