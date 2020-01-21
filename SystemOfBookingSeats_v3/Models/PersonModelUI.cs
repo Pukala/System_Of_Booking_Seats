@@ -27,5 +27,7 @@ namespace SystemOfBookingSeats_v3.Models
         [Display(Name = "Seat Number")]
         [Required(ErrorMessage = "You need to give us seat number.")]
         public int SeatNumber { get; set; }
+
+        public int MovieNumber { get; set; }
     }
 }

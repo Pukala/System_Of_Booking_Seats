@@ -27,13 +27,13 @@ namespace DataLibary.BusinessLogic
         }
 
         public static void UpdateReservation(
-            string firstName, string lastName, string emailAddress, int seatNumber)
+            string firstName, string lastName, string emailAddress, int seatNumber, int movieNumber)
         {
             InsertPersonModelElement(seatNumber, firstName, lastName, emailAddress);
             var lastPerson = GetLastPersonModel();
 
             string sql = @"UPDATE dbo.SeatsTable SET PersonId = " + lastPerson.Id +
-            " WHERE NumberSeat = @seatNumber;";
+            " WHERE NumberSeat = @seatNumber AND MovieId = " + movieNumber + "; ";
             SqlDataAccess.SaveData(sql, lastPerson);
         }
 
@@ -60,13 +60,13 @@ namespace DataLibary.BusinessLogic
                 {
                     seatModel = new SeatModel
                     {
-                        MovieId = movieNumber,
+                        MovieNumber = movieNumber,
                         NumberSeat = i + 1,
                         PersonId = null
                     };
                     dummyData.Add(seatModel);
                     InsertSeatModelElement(seatModel.NumberSeat,
-                        seatModel.PersonId ?? default(int), seatModel.MovieId);
+                        seatModel.PersonId, seatModel.MovieNumber);
                 }
             };
             return dummyData;
@@ -79,7 +79,7 @@ namespace DataLibary.BusinessLogic
             return SqlDataAccess.LoadData<SeatModel>(sql).ElementAt(0);
         }
 
-        public static void UpdateSeatData(int personId, bool iReserve, int numberSeat)
+        public static void UpdateSeatData(Nullable<int> personId, bool iReserve, int numberSeat)
         {
             SeatModel data = new SeatModel
             {
@@ -91,19 +91,6 @@ namespace DataLibary.BusinessLogic
                                   NumberSeat = @NumberSeat WHERE NumberSeat = @NumberSeat;";
 
             SqlDataAccess.SaveData(sql, data);
-        }
-
-        //public static void InsertSeatAndPerson(SeatModel seatModel)
-        //{
-        //    InsertPersonModelElement(seatModel.NumberSeat);
-        //    InsertSeatModelElement(
-        //        seatModel.NumberSeat, seatModel.IsReserve, GetLastPersonModel().Id, seatModel.MovieId);
-        //}
-
-        public static SeatModel GetLastSeatModel()
-        {
-            string sql = "select top 1 * from dbo.SeatsTable order by NumberSeat desc;";
-            return SqlDataAccess.LoadData<SeatModel>(sql).ToList().ElementAt(0);
         }
 
         public static PersonModel GetLastPersonModel()
@@ -125,20 +112,19 @@ namespace DataLibary.BusinessLogic
             SqlDataAccess.SaveData(sql, new PersonModel());
         }
 
-        public static void InsertSeatModelElement(int numberSeat, int personId, int movieId)
+        public static void InsertSeatModelElement(int numberSeat, Nullable<int> personId, int movieId)
         {
             SeatModel data = new SeatModel
             {
                 PersonId = personId,
                 NumberSeat = numberSeat,
-                MovieId = movieId
+                MovieNumber = movieId
             };
             string sql = @"insert into dbo.SeatsTable (PersonId, NumberSeat, MovieId) 
-                           values(@PersonId, @NumberSeat, @MovieId);";
+                           values(@PersonId, @NumberSeat, " + movieId + "); ";
 
             SqlDataAccess.SaveData(sql, data);
         }
-
 
         public static void InsertPersonModelElement(int seatNumber,
             string firstName = "none", string lastName = "none", string emailAdress = "None")
@@ -158,8 +144,8 @@ namespace DataLibary.BusinessLogic
 
         public static void InsertMovieData(MovieModel data)
         {
-            string sql = @"insert into dbo.MovieDataTable (NameOfMovie, ImagePath)
-                        values(@NameOfMovie, @ImagePath);";
+            string sql = @"insert into dbo.MovieDataTable (NameOfMovie, ImagePath, NumberOfMovie)
+                        values(@NameOfMovie, @ImagePath, @NumberOfMovie);";
 
             SqlDataAccess.SaveData(sql, data);
         }

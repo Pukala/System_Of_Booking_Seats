@@ -14,7 +14,7 @@ namespace SystemOfBookingSeats_v3.Models
         //public int SeatId { get; set; }
 
         [Display(Name = "Person Id")]
-        public int PersonId { get; set; }
+        public Nullable<int> PersonId { get; set; }
 
         [Display(Name = "Is Reserve")]
         public bool IsReserve { get; set; }

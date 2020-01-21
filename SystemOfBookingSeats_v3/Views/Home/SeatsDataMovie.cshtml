@@ -29,14 +29,15 @@
 
             @foreach (var item in Model)
             {
-                if (item.PersonId != 0)
-                {<div class="seatFalse">
+                if (item.PersonId == 0 || item.PersonId == null)
+                {
+                    <div class="seatTrue">
                         @item.NumberSeat
                     </div>
                 }
                 else
                 {
-                    <div class="seatTrue">
+                    <div class="seatFalse">
                         @item.NumberSeat
                     </div>
                 }

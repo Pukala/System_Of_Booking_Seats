@@ -77,4 +77,11 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[MovieDataTable]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="f4ce108e-f427-4949-9693-311d10811848" ChangeDateTime="01/21/2020 14:36:52">
+    <Property Name="ElementName" Value="[dbo].[MovieDataTable].[MovieId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MovieDataTable]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[NumberOfMovie]" />
+  </Operation>
 </Operations>

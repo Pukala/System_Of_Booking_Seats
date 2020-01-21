@@ -14,7 +14,7 @@ namespace SystemOfBookingSeats_v3.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private static int MoId;
+        private static int NumberMovie;
         private static List<SeatModel> SeatsData;
         public ActionResult Start()
         {
@@ -29,8 +29,7 @@ namespace SystemOfBookingSeats_v3.Controllers
         public ActionResult EditSeats(int id)
         {
             SeatsData = DataProcessor.LoadSeatsData(id);
-            //var dupa = DataProcessor.LoadSeatsData(id);
-            MoId = id;
+            NumberMovie = id;
             return View(SeatsData);
         }
 
@@ -40,9 +39,9 @@ namespace SystemOfBookingSeats_v3.Controllers
 
             SeatModelUI seatData = new SeatModelUI
             {
-                PersonId = data.PersonId ?? default(int),
+                PersonId = data.PersonId,
                 NumberSeat = data.NumberSeat,
-                IsReserve = data.PersonId != 0
+                IsReserve = data.PersonId != null
             };
 
             return View(seatData);
@@ -58,8 +57,8 @@ namespace SystemOfBookingSeats_v3.Controllers
                         , seatModelUI.NumberSeat);
                 else
                 {
-                    DataProcessor.DeletePersonData(seatModelUI.NumberSeat);
-                    DataProcessor.UpdateSeatData(0, seatModelUI.IsReserve
+                    //DataProcessor.DeletePersonData(seatModelUI.NumberSeat);
+                    DataProcessor.UpdateSeatData(null, seatModelUI.IsReserve
                         , seatModelUI.NumberSeat);
                 }
                 return RedirectToAction("Manage_Seats");
@@ -92,11 +91,11 @@ namespace SystemOfBookingSeats_v3.Controllers
                 SeatModel seatModel = new SeatModel
                 {
                     PersonId = null,
-                    MovieId = MoId,
+                    MovieNumber = NumberMovie,
                     NumberSeat = seatModelUI.NumberSeat
                 };
                 DataProcessor.InsertSeatModelElement(seatModel.NumberSeat,
-      default(int), seatModel.MovieId);
+      default(int), seatModel.MovieNumber);
 
                 return RedirectToAction("Manage_Seats");
             }
@@ -125,7 +124,9 @@ namespace SystemOfBookingSeats_v3.Controllers
             MovieModel data = new MovieModel
             {
                 NameOfMovie = movieModel.NameOfMovie,
-                ImagePath = "~/Content/MoviesImages/" + file.FileName
+                ImagePath = "~/Content/MoviesImages/" + file.FileName,
+                NumberOfMovie = NumberMovie
+
             };
 
             DataProcessor.InsertMovieData(data);

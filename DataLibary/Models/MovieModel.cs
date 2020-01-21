@@ -9,7 +9,7 @@ namespace DataLibary.Models
 {
     public class MovieModel
     {
-        public int MovieId { get; set; }
+        public int NumberOfMovie { get; set; }
         public string NameOfMovie { get; set; }
         public string ImagePath { get; set; }
     }

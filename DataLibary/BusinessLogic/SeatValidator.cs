@@ -18,14 +18,14 @@ namespace DataLibary.BusinessLogic
 
         public bool IsSeatValid(int numOfSeat)
         {
-            return !IsSeatFree(numOfSeat) && IsSeatNumberValid(numOfSeat);
+            return IsSeatFree(numOfSeat) && IsSeatNumberValid(numOfSeat);
         }
 
         private bool IsSeatFree(int numOfSeat)
         {
             if (numOfSeat <= Seats.Count())
             {
-                return Seats[numOfSeat - 1].PersonId == null;
+                return Seats[numOfSeat].PersonId == null;
             }
             return false;
         }
