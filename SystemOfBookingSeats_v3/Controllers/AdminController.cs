@@ -29,19 +29,20 @@ namespace SystemOfBookingSeats_v3.Controllers
         public ActionResult EditSeats(int id)
         {
             SeatsData = DataProcessor.LoadSeatsData(id);
+            //var dupa = DataProcessor.LoadSeatsData(id);
             MoId = id;
             return View(SeatsData);
         }
 
         public ViewResult Edit(int id)
         {
-            var data = SeatsData.Find(m => m.PersonId == id);
+            SeatModel data = SeatsData.Find(m => m.NumberSeat == id);
 
             SeatModelUI seatData = new SeatModelUI
             {
                 PersonId = data.PersonId ?? default(int),
-                IsReserve = data.IsReserve,
-                NumberSeat = data.NumberSeat
+                NumberSeat = data.NumberSeat,
+                IsReserve = data.PersonId != 0
             };
 
             return View(seatData);
@@ -55,6 +56,12 @@ namespace SystemOfBookingSeats_v3.Controllers
                 if (seatModelUI.IsReserve)
                     DataProcessor.UpdateSeatData(seatModelUI.PersonId, seatModelUI.IsReserve
                         , seatModelUI.NumberSeat);
+                else
+                {
+                    DataProcessor.DeletePersonData(seatModelUI.NumberSeat);
+                    DataProcessor.UpdateSeatData(0, seatModelUI.IsReserve
+                        , seatModelUI.NumberSeat);
+                }
                 return RedirectToAction("Manage_Seats");
             }
             else
@@ -84,13 +91,12 @@ namespace SystemOfBookingSeats_v3.Controllers
             {
                 SeatModel seatModel = new SeatModel
                 {
-                    IsReserve = seatModelUI.IsReserve,
                     PersonId = null,
                     MovieId = MoId,
                     NumberSeat = seatModelUI.NumberSeat
                 };
-                DataProcessor.InsertSeatModelElement(seatModel.NumberSeat, seatModel.IsReserve,
-                    default(int), seatModel.MovieId);
+                DataProcessor.InsertSeatModelElement(seatModel.NumberSeat,
+      default(int), seatModel.MovieId);
 
                 return RedirectToAction("Manage_Seats");
             }

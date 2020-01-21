@@ -29,7 +29,7 @@
 
             @foreach (var item in Model)
             {
-                if (item.IsReserve)
+                if (item.PersonId != 0)
                 {<div class="seatFalse">
                         @item.NumberSeat
                     </div>

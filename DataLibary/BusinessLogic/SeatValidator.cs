@@ -25,7 +25,7 @@ namespace DataLibary.BusinessLogic
         {
             if (numOfSeat <= Seats.Count())
             {
-                return Seats[numOfSeat - 1].IsReserve;
+                return Seats[numOfSeat - 1].PersonId == null;
             }
             return false;
         }

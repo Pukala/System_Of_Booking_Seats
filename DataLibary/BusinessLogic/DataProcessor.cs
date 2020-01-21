@@ -32,7 +32,7 @@ namespace DataLibary.BusinessLogic
             InsertPersonModelElement(seatNumber, firstName, lastName, emailAddress);
             var lastPerson = GetLastPersonModel();
 
-            string sql = @"UPDATE dbo.SeatsTable SET IsReserve = " + 1 + ", PersonId = " + lastPerson.Id +
+            string sql = @"UPDATE dbo.SeatsTable SET PersonId = " + lastPerson.Id +
             " WHERE NumberSeat = @seatNumber;";
             SqlDataAccess.SaveData(sql, lastPerson);
         }
@@ -60,13 +60,12 @@ namespace DataLibary.BusinessLogic
                 {
                     seatModel = new SeatModel
                     {
-                        IsReserve = false,
                         MovieId = movieNumber,
                         NumberSeat = i + 1,
                         PersonId = null
                     };
                     dummyData.Add(seatModel);
-                    InsertSeatModelElement(seatModel.NumberSeat, seatModel.IsReserve,
+                    InsertSeatModelElement(seatModel.NumberSeat,
                         seatModel.PersonId ?? default(int), seatModel.MovieId);
                 }
             };
@@ -85,12 +84,11 @@ namespace DataLibary.BusinessLogic
             SeatModel data = new SeatModel
             {
                 PersonId = personId,
-                IsReserve = iReserve,
                 NumberSeat = numberSeat
             };
 
             string sql = @"UPDATE dbo.SeatsTable SET PersonId = @PersonId, 
-                                 IsReserve = @IsReserve, NumberSeat = @NumberSeat WHERE NumberSeat = @NumberSeat;";
+                                  NumberSeat = @NumberSeat WHERE NumberSeat = @NumberSeat;";
 
             SqlDataAccess.SaveData(sql, data);
         }
@@ -118,21 +116,25 @@ namespace DataLibary.BusinessLogic
         {
             string sql = "delete from dbo.SeatsTable where NumberSeat = " + numberSeat + ";";
             SqlDataAccess.SaveData(sql, new SeatModel());
-            sql = "delete from dbo.Person where SeatNumber = " + numberSeat + ";";
+            DeletePersonData(numberSeat);
+        }
+
+        public static void DeletePersonData(int numberSeat)
+        {
+            string sql = "delete from dbo.Person where SeatNumber = " + numberSeat + ";";
             SqlDataAccess.SaveData(sql, new PersonModel());
         }
 
-        public static void InsertSeatModelElement(int numberSeat, bool isReserve, int personId, int movieId)
+        public static void InsertSeatModelElement(int numberSeat, int personId, int movieId)
         {
             SeatModel data = new SeatModel
             {
                 PersonId = personId,
-                IsReserve = isReserve,
                 NumberSeat = numberSeat,
                 MovieId = movieId
             };
-            string sql = @"insert into dbo.SeatsTable (PersonId, IsReserve, NumberSeat, MovieId) 
-                           values(@PersonId, @IsReserve, @NumberSeat, @MovieId);";
+            string sql = @"insert into dbo.SeatsTable (PersonId, NumberSeat, MovieId) 
+                           values(@PersonId, @NumberSeat, @MovieId);";
 
             SqlDataAccess.SaveData(sql, data);
         }
