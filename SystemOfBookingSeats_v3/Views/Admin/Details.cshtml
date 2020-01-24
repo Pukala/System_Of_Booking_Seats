@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div id="data">
+    <h2>Details for seat number @Model.NumberSeat</h2>
+    <br />
+    @using (Html.BeginForm())
+    {
+        <h4>First Name: @Model.FirstName</h4>
+        <h4>Second Name: @Model.LastName</h4>
+
+        @Html.ActionLink("Cancel and back to list", "Manage_Seats")
+    }
+</div>

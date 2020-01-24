@@ -84,4 +84,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[NumberOfMovie]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="671e7b39-9a7b-41b8-a952-434d22b1981e" ChangeDateTime="01/23/2020 11:21:32">
+    <Property Name="ElementName" Value="[dbo].[MovieDataTable].[id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[MovieDataTable]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Movieid]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5f9041a6-eb2d-4952-9804-f92ef59fd808" ChangeDateTime="01/23/2020 11:27:45">
+    <Property Name="ElementName" Value="[dbo].[SeatsTable].[MovieId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SeatsTable]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[MovieNumber]" />
+  </Operation>
 </Operations>

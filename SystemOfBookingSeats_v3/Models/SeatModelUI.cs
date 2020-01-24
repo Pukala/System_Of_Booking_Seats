@@ -10,11 +10,11 @@ namespace SystemOfBookingSeats_v3.Models
 {
     public class SeatModelUI
     {
-        //[HiddenInput(DisplayValue = false)]
-        //public int SeatId { get; set; }
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
 
-        [Display(Name = "Person Id")]
-        public Nullable<int> PersonId { get; set; }
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
 
         [Display(Name = "Is Reserve")]
         public bool IsReserve { get; set; }

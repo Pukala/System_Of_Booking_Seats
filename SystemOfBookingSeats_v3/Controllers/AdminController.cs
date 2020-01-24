@@ -39,7 +39,6 @@ namespace SystemOfBookingSeats_v3.Controllers
 
             SeatModelUI seatData = new SeatModelUI
             {
-                PersonId = data.PersonId,
                 NumberSeat = data.NumberSeat,
                 IsReserve = data.PersonId != null
             };
@@ -53,12 +52,11 @@ namespace SystemOfBookingSeats_v3.Controllers
             if (ModelState.IsValid)
             {
                 if (seatModelUI.IsReserve)
-                    DataProcessor.UpdateSeatData(seatModelUI.PersonId, seatModelUI.IsReserve
+                    DataProcessor.UpdateSeatData(seatModelUI.FirstName, seatModelUI.LastName, seatModelUI.IsReserve
                         , seatModelUI.NumberSeat);
                 else
                 {
-                    //DataProcessor.DeletePersonData(seatModelUI.NumberSeat);
-                    DataProcessor.UpdateSeatData(null, seatModelUI.IsReserve
+                    DataProcessor.UpdateSeatData("", "", seatModelUI.IsReserve
                         , seatModelUI.NumberSeat);
                 }
                 return RedirectToAction("Manage_Seats");
@@ -67,6 +65,28 @@ namespace SystemOfBookingSeats_v3.Controllers
             {
                 return View(seatModelUI);
             }
+        }
+
+        public ViewResult Details(int id)
+        {
+            SeatModel seatdata = SeatsData.Find(m => m.NumberSeat == id);
+            PersonModel personModel = new PersonModel();
+
+            if (seatdata.PersonId != null)
+            {
+                personModel = DataProcessor.FindPerson(seatdata.PersonId);
+            }
+            personModel = DataProcessor.FindPerson(seatdata.PersonId);
+
+            SeatModelUI seatData = new SeatModelUI
+            {
+                NumberSeat = seatdata.NumberSeat,
+                IsReserve = seatdata.PersonId != null,
+                FirstName = personModel.FirstName,
+                LastName = personModel.LastName
+            };
+
+            return View(seatData);
         }
 
         public ActionResult Delete(int id)
@@ -91,11 +111,11 @@ namespace SystemOfBookingSeats_v3.Controllers
                 SeatModel seatModel = new SeatModel
                 {
                     PersonId = null,
-                    MovieNumber = NumberMovie,
+                    NumberOfMovie = NumberMovie,
                     NumberSeat = seatModelUI.NumberSeat
                 };
                 DataProcessor.InsertSeatModelElement(seatModel.NumberSeat,
-      default(int), seatModel.MovieNumber);
+      default(int), NumberMovie);
 
                 return RedirectToAction("Manage_Seats");
             }
@@ -125,13 +145,17 @@ namespace SystemOfBookingSeats_v3.Controllers
             {
                 NameOfMovie = movieModel.NameOfMovie,
                 ImagePath = "~/Content/MoviesImages/" + file.FileName,
-                NumberOfMovie = NumberMovie
-
             };
 
             DataProcessor.InsertMovieData(data);
 
             return View();
+        }
+
+        public ViewResult Movies()
+        {
+            var movieData = DataProcessor.LoadMoviesData();
+            return View(movieData);
         }
     }
 }

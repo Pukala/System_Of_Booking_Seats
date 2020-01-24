@@ -10,8 +10,6 @@ namespace SystemOfBookingSeats_v3.Models
 {
     public class MovieModelUI
     {
-        public int MovieId { get; set; }
-
         [Required(ErrorMessage = "Enter the name")]
         [DisplayName("Name")]
         public string NameOfMovie { get; set; }

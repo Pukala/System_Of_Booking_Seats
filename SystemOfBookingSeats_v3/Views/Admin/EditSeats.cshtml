@@ -16,7 +16,6 @@
     {
         <table class="table">
             <tr>
-                <th>@Html.DisplayNameFor(model => model.PersonId)</th>
                 <th>IsReserve</th>
                 <th>@Html.DisplayNameFor(model => model.NumberSeat)</th>
                 <th></th>
@@ -27,19 +26,24 @@
                 SystemOfBookingSeats_v3.Models.SeatModelUI seat = new SystemOfBookingSeats_v3.Models.SeatModelUI
                 {
                     IsReserve = item.PersonId != null,
-                    PersonId = item.PersonId,
                     NumberSeat = item.NumberSeat,
                 };
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => seat.PersonId)</td>
                     <td>@Html.DisplayFor(modelItem => seat.IsReserve)</td>
                     <td>@Html.DisplayFor(modelItem => seat.NumberSeat)</td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.NumberSeat }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.NumberSeat })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.NumberSeat })|
+
+                        @if (seat.IsReserve)
+                        {
+                            @Html.ActionLink("Details", "Details", new { id = item.NumberSeat })
+                        }
+
                     </td>
                 </tr>
             }
+            /**/
 
         </table>
 
