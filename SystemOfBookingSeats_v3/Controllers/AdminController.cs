@@ -111,7 +111,7 @@ namespace SystemOfBookingSeats_v3.Controllers
                 SeatModel seatModel = new SeatModel
                 {
                     PersonId = null,
-                    NumberOfMovie = NumberMovie,
+                    MovieNumber = NumberMovie,
                     NumberSeat = seatModelUI.NumberSeat
                 };
                 DataProcessor.InsertSeatModelElement(seatModel.NumberSeat,

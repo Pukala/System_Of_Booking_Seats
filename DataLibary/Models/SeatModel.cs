@@ -10,6 +10,6 @@ namespace DataLibary.Models
     {
         public Nullable<int> PersonId { get; set; }
         public int NumberSeat { get; set; }
-        public int NumberOfMovie { get; set; }
+        public int MovieNumber { get; set; }
     }
 }

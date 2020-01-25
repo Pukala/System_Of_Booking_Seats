@@ -16,8 +16,6 @@ namespace DataLibary.BusinessLogic
 {
     public static class DataProcessor
     {
-
-
         public static int FindSeat(int seatNumber)
         {
 
@@ -60,23 +58,16 @@ namespace DataLibary.BusinessLogic
                 {
                     seatModel = new SeatModel
                     {
-                        NumberOfMovie = movieNumber,
+                        MovieNumber = movieNumber,
                         NumberSeat = i + 1,
                         PersonId = null
                     };
                     dummyData.Add(seatModel);
                     InsertSeatModelElement(seatModel.NumberSeat,
-                        seatModel.PersonId, seatModel.NumberOfMovie);
+                        seatModel.PersonId, seatModel.MovieNumber);
                 }
             };
             return dummyData;
-        }
-
-        public static SeatModel LoadSeatData(int seatNumber)
-        {
-            string sql = @"select * from dbo.SeatsTable where dbo.SeatsTable.NumberSeat = " + seatNumber + ";";
-
-            return SqlDataAccess.LoadData<SeatModel>(sql).ElementAt(0);
         }
 
         public static void UpdateSeatData(string firstName, string lastName, bool iReserve, int numberSeat)
@@ -135,7 +126,7 @@ namespace DataLibary.BusinessLogic
             {
                 PersonId = personId,
                 NumberSeat = numberSeat,
-                NumberOfMovie = numberOfMovie
+                MovieNumber = numberOfMovie
             };
             string sql = @"insert into dbo.SeatsTable (PersonId, NumberSeat, MovieNumber) 
                            values(@PersonId, @NumberSeat, " + numberOfMovie + "); ";
