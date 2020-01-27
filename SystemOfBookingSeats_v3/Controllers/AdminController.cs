@@ -33,31 +33,31 @@ namespace SystemOfBookingSeats_v3.Controllers
             return View(SeatsData);
         }
 
-        public ViewResult Edit(int id)
+        public ViewResult Edit(SeatModel seatdata)
         {
-            SeatModel data = SeatsData.Find(m => m.NumberSeat == id);
+            //SeatModel data = SeatsData.Find(m => m.NumberSeat == id);
 
             SeatModelUI seatData = new SeatModelUI
             {
-                NumberSeat = data.NumberSeat,
-                IsReserve = data.PersonId != null
+                NumberSeat = seatdata.NumberSeat,
+                IsReserve = seatdata.PersonId != null
             };
 
             return View(seatData);
         }
 
         [HttpPost]
-        public ActionResult Edit(SeatModelUI seatModelUI)
+        public ActionResult Edit(SeatModelUI seatModelUI, string email)
         {
             if (ModelState.IsValid)
             {
                 if (seatModelUI.IsReserve)
                     DataProcessor.UpdateSeatData(seatModelUI.FirstName, seatModelUI.LastName, seatModelUI.IsReserve
-                        , seatModelUI.NumberSeat);
+                        , seatModelUI.NumberSeat, NumberMovie);
                 else
                 {
                     DataProcessor.UpdateSeatData("", "", seatModelUI.IsReserve
-                        , seatModelUI.NumberSeat);
+                        , seatModelUI.NumberSeat, NumberMovie);
                 }
                 return RedirectToAction("Manage_Seats");
             }
@@ -67,16 +67,14 @@ namespace SystemOfBookingSeats_v3.Controllers
             }
         }
 
-        public ViewResult Details(int id)
+        public ViewResult Details(SeatModel seatdata)
         {
-            SeatModel seatdata = SeatsData.Find(m => m.NumberSeat == id);
             PersonModel personModel = new PersonModel();
 
             if (seatdata.PersonId != null)
             {
                 personModel = DataProcessor.FindPerson(seatdata.PersonId);
             }
-            personModel = DataProcessor.FindPerson(seatdata.PersonId);
 
             SeatModelUI seatData = new SeatModelUI
             {
@@ -89,9 +87,9 @@ namespace SystemOfBookingSeats_v3.Controllers
             return View(seatData);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(SeatModel seatModel)
         {
-            DataProcessor.DeleteReservationData(id);
+            DataProcessor.DeleteReservationData(seatModel);
             return RedirectToAction("Manage_Seats");
         }
 

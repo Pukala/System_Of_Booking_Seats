@@ -52,7 +52,7 @@ namespace SystemOfBookingSeats_v3.Controllers
             {
                 if (seatValidator.IsSeatValid(model.SeatNumber))
                 {
-                    DataProcessor.UpdateReservation(model.FirstName, model.LastName,
+                    DataProcessor.PrepareReservation(model.FirstName, model.LastName,
                         model.EmailAdress, model.SeatNumber, NumberMovie);
 
                     return RedirectToAction("SeatsDataMovie");

@@ -16,15 +16,7 @@ namespace DataLibary.BusinessLogic
 {
     public static class DataProcessor
     {
-        public static int FindSeat(int seatNumber)
-        {
-
-            string sql = @"select * from dbo.SeatsTable where dbo.SeatsTable.NumberSeat = " + seatNumber + ";";
-
-            return SqlDataAccess.LoadData<SeatModel>(sql).ElementAt(0).NumberSeat;
-        }
-
-        public static void UpdateReservation(
+        public static void PrepareReservation(
             string firstName, string lastName, string emailAddress, int seatNumber, int movieNumber)
         {
             InsertPersonModelElement(firstName, lastName, emailAddress);
@@ -70,19 +62,30 @@ namespace DataLibary.BusinessLogic
             return dummyData;
         }
 
-        public static void UpdateSeatData(string firstName, string lastName, bool iReserve, int numberSeat)
+        public static void UpdateSeatData(string firstName, string lastName, bool iReserve, int numberSeat, int movieNumber)
         {
             var person = FindPerson(firstName, lastName);
-            SeatModel data = new SeatModel
+            string sql;
+            if (person.Count() == 0)
             {
-                PersonId = person[0].Id,
-                NumberSeat = numberSeat
-            };
+                PrepareReservation(firstName, lastName, "none", numberSeat, movieNumber);
+                var lastPerson = GetLastPersonModel();
+                sql = "UPDATE dbo.SeatsTable SET PersonId = " + lastPerson.Id + " WHERE NumberSeat = " + numberSeat + "; ";
+            }
+            else
+            {
+                SeatModel data = new SeatModel
+                {
+                    PersonId = person[0].Id,
+                    NumberSeat = numberSeat
+                };
 
-            string sql = @"UPDATE dbo.SeatsTable SET PersonId = @PersonId, 
-                                  NumberSeat = @NumberSeat WHERE NumberSeat = @NumberSeat;";
+                sql = @"UPDATE dbo.SeatsTable SET PersonId = @PersonId WHERE NumberSeat = @NumberSeat;";
 
-            SqlDataAccess.SaveData(sql, data);
+                SqlDataAccess.SaveData(sql, data);
+            }
+
+
         }
 
         public static PersonModel GetLastPersonModel()
@@ -93,8 +96,8 @@ namespace DataLibary.BusinessLogic
 
         public static List<PersonModel> FindPerson(string firstName, string lastName)
         {
-            string sql = @"select * from dbo.Person where dbo.Person.FirstName = " + firstName +
-                "AND dbo.Person.LastName = " + lastName + ";";
+            string sql = @"select * from dbo.Person where FirstName = '" + firstName +
+                "' AND LastName = '" + lastName + "';";
 
             return SqlDataAccess.LoadData<PersonModel>(sql).ToList();
         }
@@ -107,17 +110,19 @@ namespace DataLibary.BusinessLogic
             return SqlDataAccess.LoadData<PersonModel>(sql).ToList()[0];
         }
 
-        public static void DeleteReservationData(int numberSeat)
+        public static void DeleteReservationData(SeatModel seatModel)
         {
-            string sql = "delete from dbo.SeatsTable where NumberSeat = " + numberSeat + ";";
+            DeletePersonData(seatModel.PersonId);
+            string sql = @"UPDATE dbo.SeatsTable SET PersonId = null WHERE PersonId = " + seatModel.PersonId + "; ";
             SqlDataAccess.SaveData(sql, new SeatModel());
-            DeletePersonData(numberSeat);
         }
-
-        public static void DeletePersonData(int numberSeat)
+        public static void DeletePersonData(Nullable<int> id)
         {
-            string sql = "delete from dbo.Person where SeatNumber = " + numberSeat + ";";
-            SqlDataAccess.SaveData(sql, new PersonModel());
+            if (id != null)
+            {
+                string sql = "delete from dbo.Person where Id = " + id + ";";
+                SqlDataAccess.SaveData(sql, new PersonModel());
+            }
         }
 
         public static void InsertSeatModelElement(int numberSeat, Nullable<int> personId, int numberOfMovie)

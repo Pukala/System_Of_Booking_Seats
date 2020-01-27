@@ -32,12 +32,22 @@
                     <td>@Html.DisplayFor(modelItem => seat.IsReserve)</td>
                     <td>@Html.DisplayFor(modelItem => seat.NumberSeat)</td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.NumberSeat }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.NumberSeat })|
+                        @{
+                            DataLibary.Models.SeatModel seatModel = new DataLibary.Models.SeatModel
+                            {
+                                MovieNumber = item.MovieNumber,
+                                NumberSeat = item.NumberSeat,
+                                PersonId = item.PersonId
+                            };
+
+                        }
+                        @Html.ActionLink("Edit", "Edit", seatModel) |
+                        @Html.ActionLink("Delete", "Delete", seatModel)|
 
                         @if (seat.IsReserve)
                         {
-                            @Html.ActionLink("Details", "Details", new { id = item.NumberSeat })
+
+                            @Html.ActionLink("Details", "Details", seatModel)
                         }
 
                     </td>
