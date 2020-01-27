@@ -3,7 +3,6 @@
     [FirstName]   NVARCHAR (50) NULL,
     [LastName]    NVARCHAR (50) NULL,
     [EmailAdress] NVARCHAR(50)    NULL,
-    [SeatNumber] INT NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 
