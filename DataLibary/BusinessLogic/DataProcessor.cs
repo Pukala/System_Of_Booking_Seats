@@ -21,9 +21,10 @@ namespace DataLibary.BusinessLogic
         {
             InsertPersonModelElement(firstName, lastName, emailAddress);
             var lastPerson = GetLastPersonModel();
+            int movieId = FindMovie(movieNumber);
 
             string sql = @"UPDATE dbo.SeatsTable SET PersonId = " + lastPerson.Id +
-            " WHERE NumberSeat = " + seatNumber + " AND MovieNumber = " + movieNumber + "; ";
+            " WHERE NumberSeat = " + seatNumber + " AND IdMovie = " + movieId + "; ";
             SqlDataAccess.SaveData(sql, lastPerson);
         }
 
@@ -60,6 +61,12 @@ namespace DataLibary.BusinessLogic
                 }
             };
             return dummyData;
+        }
+
+        private static int FindMovie(int number)
+        {
+            string sql = "select * from dbo.MovieDataTable where dbo.MovieDataTable.NumberOfMovie = " + number + ";";
+            return SqlDataAccess.LoadData<MovieModel>(sql)[0].Movieid;
         }
 
         public static void UpdateSeatData(string firstName, string lastName, bool iReserve, int numberSeat, int movieNumber)
@@ -127,14 +134,15 @@ namespace DataLibary.BusinessLogic
 
         public static void InsertSeatModelElement(int numberSeat, Nullable<int> personId, int numberOfMovie)
         {
+            int movieId = FindMovie(numberOfMovie);
             SeatModel data = new SeatModel
             {
                 PersonId = personId,
                 NumberSeat = numberSeat,
                 MovieNumber = numberOfMovie
             };
-            string sql = @"insert into dbo.SeatsTable (PersonId, NumberSeat, MovieNumber) 
-                           values(@PersonId, @NumberSeat, " + numberOfMovie + "); ";
+            string sql = @"insert into dbo.SeatsTable (PersonId, NumberSeat, MovieNumber, IdMovie) 
+                           values(@PersonId, @NumberSeat, " + numberOfMovie + "," + movieId + "); ";
 
             SqlDataAccess.SaveData(sql, data);
         }

@@ -35,8 +35,6 @@ namespace SystemOfBookingSeats_v3.Controllers
 
         public ViewResult Edit(SeatModel seatdata)
         {
-            //SeatModel data = SeatsData.Find(m => m.NumberSeat == id);
-
             SeatModelUI seatData = new SeatModelUI
             {
                 NumberSeat = seatdata.NumberSeat,
@@ -47,7 +45,7 @@ namespace SystemOfBookingSeats_v3.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(SeatModelUI seatModelUI, string email)
+        public ActionResult Edit(SeatModelUI seatModelUI)
         {
             if (ModelState.IsValid)
             {
